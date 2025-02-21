@@ -1,5 +1,10 @@
 <?php
-
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,38 +18,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/hello', function (){
-    return 'Hello World';
-});
+// Route::get('/hello', function (){
+//     return 'Hello World';
+// });
 
-Route::get('/world', function (){
-    return 'World';
-});
+// Route::get('/world', function (){
+//     return 'World';
+// });
 
-Route::get('/', function (){
-    return 'Selamat Datang';
-});
+// Route::get('/', function (){
+//     return 'Selamat Datang';
+// });
 
-Route::get('/about', function (){
-    return '2341720137 Vemas Bagus Fermanda';
-});
+// Route::get('/about', function (){
+//     return '2341720137 Vemas Bagus Fermanda';
+// });
 
 // Route::get('/user/{name}', function ($name) {
 //     return 'Nama Saya '.$name;
 // });
 
-Route::get('/posts/{post}/comments/{comment}', function
-    ($postId, $commentId) {
-     return 'Pos ke-'.$postId." Komentar ke-: ".$commentId;
-});
+// Route::get('/posts/{post}/comments/{comment}', function
+//     ($postId, $commentId) {
+//      return 'Pos ke-'.$postId." Komentar ke-: ".$commentId;
+// });
 
-Route::get('/articles/{id}', function ($id) {
-    return 'Halaman Artikel dengan ID '.$id;
-});
+// Route::get('/articles/{id}', function ($id) {
+//     return 'Halaman Artikel dengan ID '.$id;
+// });
 
 // Route::get('/user/{name?}', function ($name=null) {
 //         return 'Nama saya '.$name;
@@ -52,8 +57,31 @@ Route::get('/articles/{id}', function ($id) {
 
 // Route::get('/user/{name?}', function ($name='John') {
 //     return 'Nama saya '.$name;
-//     });SS
+//     });
 
-Route::get('/user/profile', function() {
-        return 'love you';
-       })->name('profile');
+// Route::get('/user/profile', function() {
+//         return 'love you';
+//        })->name('profile');
+
+
+Route::get('/hello', [WelcomeController::class,'hello']);
+
+Route::get('/index', [HomeController::class, 'index']);
+
+// Route::get('/indexs', [PageController::class, 'indexs']);
+// Route::get('/about', [PageController::class, 'about']);
+// Route::get('/articles', [PageController::class, 'articles']);
+
+Route::get('/about', [AboutController::class, 'about']);
+Route::get('/articles/{id}', [ArticleController::class, 'articles']);
+Route::resource('photos', PhotoController::class);
+
+// Route::get('/greeting', function () {
+//     return view('blog.hello', ['name' => 'Vemas']);
+//     });
+
+Route::get('/greeting', [WelcomeController::class,'greeting']);
+
+Route::get('/greeting', function () {
+    return view('hello', ['name' => 'Vemas']);
+    });
